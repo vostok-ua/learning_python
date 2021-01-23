@@ -135,3 +135,5 @@ for i in range (9):
     if judgement(game_field) != "Game not finished":
         break
 print(judgement(game_field))
+input()
+
