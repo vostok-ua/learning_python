@@ -1,0 +1,74 @@
+class Coffee:
+    def __init__(self, cups, water, milk, beans, money):
+        self.cups = cups
+        self.water = water
+        self.milk = milk
+        self.beans = beans
+        self.money = money
+
+    def __str__(self):
+        return """\nThe coffee machine has:\n{} of water\n{} of milk\n{} of coffee beans\n{} of disposable cups\n${} of money""".format(self.water, self.milk, self.beans, self.cups, self.money)
+
+    def buy(self):
+        if machine.cups >= self.cups:
+            if machine.water >= self.water:
+                if machine.milk >= self.milk:
+                    if machine.beans >= self.beans:
+                        machine.cups -= self.cups
+                        machine.water -= self.water
+                        machine.milk -= self.milk
+                        machine.beans -= self.beans
+                        machine.money += self.money
+                        return "I have enough resources, making you a coffee!"
+                    else:
+                        return "Sorry, not enough beans!"
+                else:
+                    return "Sorry, not enough milk!"
+            else:
+                return "Sorry, not enough water!"
+        else:
+            return "Sorry, not enough cups!"
+
+    def fill(self):
+        self.water += int(input("\nWrite how many ml of water do you want to add:"))
+        self.milk += int(input("Write how many ml of milk do you want to add:"))
+        self.beans += int(input("Write how many grams of coffee beans do you want to add:"))
+        self.cups += int(input("Write how many disposable cups of coffee do you want to add:"))
+
+
+def main():
+    global state
+    if state == "start":
+        state = input("\nWrite action (buy, fill, take, remaining, exit):")
+    elif state == "remaining":
+        print(machine)
+        state = "start"
+    elif state == "take":
+        print("\nI gave you ${}".format(machine.money))
+        machine.money = 0
+        state = "start"
+    elif state == "buy":
+        drink = input("\nWhat do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
+        if drink == "back":
+            state = "start"
+        elif drink == "1":
+            print(espresso.buy())
+            state = "start"
+        elif drink == "2":
+            print(latte.buy())
+            state = "start"
+        elif drink == "3":
+            print(cappuccino.buy())
+            state = "start"
+    elif state == "fill":
+        machine.fill()
+        state = "start"
+
+
+machine = Coffee(9, 400, 540, 120, 550)
+espresso = Coffee(1, 250, 0, 16, 4)
+latte = Coffee(1, 350, 75, 20, 7)
+cappuccino = Coffee(1, 200, 100, 12, 6)
+state = "start"
+while state != "exit":
+    main()
